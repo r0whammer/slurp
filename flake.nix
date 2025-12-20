@@ -20,12 +20,14 @@
         pkgs.gcc
         pkgs.gtk3
         pkgs.webkitgtk_4_1
+        pkgs.webkitgtk_6_0
         pkgs.libsoup_3
         pkgs.glib
       ];
 
       shellHook = ''
         export PATH="$HOME/go/bin:$PATH"
+        export PKG_CONFIG_PATH="${pkgs.webkitgtk_4_1.dev}/lib/pkgconfig:${pkgs.gtk3.dev}/lib/pkgconfig:${pkgs.glib.dev}/lib/pkgconfig";
         echo "devshell ready"
         echo "node: $(node -v)"
         echo "go:   $(go version)"
