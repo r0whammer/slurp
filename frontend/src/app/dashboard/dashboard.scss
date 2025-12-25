@@ -1,0 +1,58 @@
+.dash {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.title h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.subtitle {
+  margin: 4px 0 0 0;
+  opacity: 0.75;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search input {
+  width: 360px;
+}
+
+.cover {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cell-main .primary {
+  font-weight: 600;
+}
+
+.cell-main .secondary {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.error {
+  color: #ff6b6b;
+}

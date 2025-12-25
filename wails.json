@@ -1,0 +1,14 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "slurp",
+  "outputfilename": "slurp",
+  "frontend:install": "npm ci",
+  "frontend:build": "npx ng build",
+  "frontend:dev:watcher": "npx ng serve",
+  "frontend:dev:serverUrl": "auto",
+  "frontend:dir": "frontend",
+  "author": {
+    "name": "r0whammer",
+    "email": "hallucinate_genistin@veilias.com"
+  }
+}
