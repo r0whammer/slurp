@@ -1,0 +1,83 @@
+<div class="dash">
+  <div class="header">
+    <div class="title">
+      <h1>Dashboard</h1>
+      <p class="subtitle">Saved Songs</p>
+    </div>
+
+    <div class="actions">
+      <span class="p-input-icon-left search">
+        <i class="pi pi-search"></i>
+        <input pInputText type="text" placeholder="Filter (track / artist / album)" (input)="onGlobalFilter($event)" />
+      </span>
+
+      <button pButton type="button" label="Clear" icon="pi pi-filter-slash" (click)="clearAll()"></button>
+      <button pButton type="button" label="Refresh" icon="pi pi-refresh" (click)="refresh()"></button>
+    </div>
+  </div>
+
+  <div class="status" *ngIf="error">
+    <span class="error">Error: {{ error }}</span>
+  </div>
+
+  <div class="spinner" *ngIf="loading">
+    <p-progressSpinner ariaLabel="Loading"></p-progressSpinner>
+  </div>
+
+  <p-table #dt *ngIf="!loading" [value]="tracks" [paginator]="true" [rows]="25" [rowsPerPageOptions]="[25, 50, 100]"
+    [showCurrentPageReport]="true" currentPageReportTemplate="{first}-{last} of {totalRecords}"
+    [globalFilterFields]="['trackTitle', 'artistTitle', 'albumTitle']" [sortMode]="'multiple'" [resizableColumns]="true"
+    [reorderableColumns]="true" [rowHover]="true" [tableStyle]="{ 'min-width': '900px' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 72px;">Cover</th>
+
+        <th pSortableColumn="trackTitle">
+          Song
+          <p-sortIcon field="trackTitle"></p-sortIcon>
+          <p-columnFilter field="trackTitle" matchMode="contains" display="menu" [showMatchModes]="false"
+            [showOperator]="false" [showAddButton]="false"></p-columnFilter>
+        </th>
+
+        <th pSortableColumn="artistTitle">
+          Artist
+          <p-sortIcon field="artistTitle"></p-sortIcon>
+          <p-columnFilter field="artistTitle" matchMode="contains" display="menu" [showMatchModes]="false"
+            [showOperator]="false" [showAddButton]="false"></p-columnFilter>
+        </th>
+
+        <th pSortableColumn="albumTitle">
+          Album
+          <p-sortIcon field="albumTitle"></p-sortIcon>
+          <p-columnFilter field="albumTitle" matchMode="contains" display="menu" [showMatchModes]="false"
+            [showOperator]="false" [showAddButton]="false"></p-columnFilter>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>
+          <img class="cover" [src]="row.coverUrl || 'assets/cover-placeholder.png'" [alt]="row.albumTitle"
+            loading="lazy" />
+        </td>
+        <td class="cell-main">
+          <div class="primary">{{ row.trackTitle }}</div>
+          <div class="secondary" *ngIf="row.addedAt">Saved {{ row.addedAt | date:'mediumDate' }}</div>
+        </td>
+        <td class="cell-main">
+          <div class="primary">{{ row.artistTitle }}</div>
+        </td>
+        <td class="cell-main">
+          <div class="primary">{{ row.albumTitle }}</div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No tracks found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
